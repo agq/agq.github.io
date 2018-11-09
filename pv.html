@@ -1,0 +1,349 @@
+<!DOCTYPE html>
+<html lang="zh">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="icon" type="image/png" sizes="16x16" href="images/fa.ico">
+    <title>能源管理系统</title>
+
+    <!-- Bootstrap Core CSS -->
+    <link rel="stylesheet" href="http://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <!-- Menu CSS -->
+    <!-- Custom CSS -->
+    <link href="css/style.css" rel="stylesheet">
+    <!-- color CSS -->
+    <link href="css/colors/blue-dark.css" id="theme" rel="stylesheet">
+</head>
+
+<body class="fix-header">
+<!-- ============================================================== -->
+<!-- Preloader -->
+<!-- ============================================================== -->
+<div class="preloader">
+    <svg class="circular" viewBox="25 25 50 50">
+        <circle class="path" cx="50" cy="50" r="20" fill="none" stroke-width="2" stroke-miterlimit="10" />
+    </svg>
+</div>
+<!-- ============================================================== -->
+<!-- Wrapper -->
+<!-- ============================================================== -->
+<div id="wrapper">
+    <!-- ============================================================== -->
+    <!-- Topbar header - style you can find in pages.scss -->
+    <!-- ============================================================== -->
+    <nav class="navbar navbar-default navbar-static-top m-b-0">
+        <div class="navbar-header">
+
+            <!-- /Logo -->
+            <ul class="nav navbar-top-links navbar-right pull-right">
+                <li class="dropdown">
+                    <a class="dropdown-toggle profile-pic" data-toggle="dropdown" href="#"><b class="hidden-xs">EMS 管理员</b><span class="caret"></span> </a>
+                    <ul class="dropdown-menu dropdown-user animated flipInY">
+                        <li><a href="#"><i class="ti-settings"></i> 账户设置</a></li>
+                        <li role="separator" class="divider"></li>
+                        <li><a class="logout" href="logout.html"><i class="fa fa-power-off"></i> 退出登录</a></li>
+                    </ul>
+                    <!-- /.dropdown-user -->
+                </li>
+                <li class="text-white">
+                        <div class="stat-item">
+                            <h1 id="theTime" class="text-white">20:31</h1>
+                        </div>
+
+                        <div class="stat-item">
+                            <h5 id="theDate" class="text-white">1 Oct</h5>
+                            <h5 id="theYear" class="text-white">2017</h5>
+                        </div>
+                    <!--</div>-->
+                </li>
+            </ul>
+                <!-- /.time -->
+        </div>
+        <!-- /.navbar-header -->
+        <!-- /.navbar-top-links -->
+        <!-- /.navbar-static-side -->
+    </nav>
+    <!-- End Top Navigation -->
+    <!-- ============================================================== -->
+    <!-- Left Sidebar - style you can find in sidebar.scss  -->
+    <!-- ============================================================== -->
+    <div class="navbar-default sidebar" role="navigation">
+        <div class="sidebar-nav slimscrollsidebar">
+            <div class="sidebar-head">
+                <h3><span class="fa-fw open-close"><i class="ti-menu hidden-xs"></i><i class="ti-close visible-xs"></i></span> <span class="hide-menu">EMS </span></h3>
+            </div>
+            <ul class="nav" id="side-menu">
+                <li> <a href="index.html" class="waves-effect"><i class="mdi mdi-av-timer fa-fw" data-icon="v"></i><span class="hide-menu">信息面板</span></a> </li>
+                <li> <a href="pv.html" class="waves-effect active"><i class="mdi mdi-apps fa-fw"></i><span class="hide-menu">光伏</span></a> </li>
+                <li> <a href="store.html" class="waves-effect"><i class="mdi mdi-clipboard-text fa-fw"></i><span class="hide-menu">储能</span></a> </li>
+                <li> <a href="forecast.html" class="waves-effect"><i class="mdi mdi-binoculars fa-fw"></i><span class="hide-menu">预测</span></a> </li>
+
+
+                <li><a href="index.html" class="waves-effect"><i class="mdi mdi-logout fa-fw"></i> <span class="hide-menu">退出登录</span></a></li>
+
+            </ul>
+        </div>
+    </div>
+    <!-- ============================================================== -->
+    <!-- End Left Sidebar -->
+    <!-- ============================================================== -->
+    <!-- ============================================================== -->
+    <!-- Page Content -->
+    <!-- ============================================================== -->
+    <div id="page-wrapper">
+        <div class="container-fluid">
+            <!-- ============================================================== -->
+            <!-- Other sales widgets -->
+            <!-- ============================================================== -->
+            <!-- day/week/month data -->
+
+            <div class="row m-t-20">
+
+                <div class="m-t-15 row">
+                    <div class="col-md-12 col-lg-7">
+                        <div class="white-box" style="margin-left:15px;">
+                            <div class="bg-theme m-b-0" style="background-color: #2f303c!important;">
+                                <div class="city-weather-widget">
+                                    <div class="row" style="margin-left:10px;">
+                                        <ul class="side-icon-text">
+                                            <li><h1 class="box-title pull-left" style="font-size:30px">光伏发电量</h1><span class="di vm">
+                                            	<i class="wi wi-day-sunny" style="margin-left:15px;"></i></span>
+                                                <div class="di vm" >
+                                                    <h2 class="m-b-0">7~12<sup>o</sup></h2>
+                                                </div>
+                                            </li>
+                                            <div class="btn-group m-b-30 m-r-30 pull-right">
+                                                <button type="button" class="btn btn-default btn-outline waves-effect">日</button>
+                                                <button type="button" class="btn btn-default btn-outline waves-effect">月</button>
+                                                <button type="button" class="btn btn-default btn-outline waves-effect">年</button>
+                                            </div>
+                                        </ul>
+                                    </div>
+                                    <div class="row p-t-30">
+                                        <div class="col-md-12">
+                                            <div id="pvChart" style="height: 350px"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="col-md-12 col-lg-5">
+                    <div class="white-box" style="height:493px;">
+                    <div class="row row-in text-center">
+                        <div class="col-lg-3 col-md-3 col-sm-3 row-in-br">
+                            <div class="row">
+                                    <div >
+                                        <div class=" text-muted m-t-20">累计发电量</div>
+                                        <h2 ><span class="counter">720,110</span></h2>千瓦时
+                                    </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-3 col-md-3 col-sm-3  b-0">
+                            <div >
+                                <div class=" text-muted m-t-20">累计发电时长</div>
+                                <h2 ><span class="counter">120</span> </h2>小时
+                            </div>
+                        </div>
+                        <div class="col-lg-3 col-md-3 col-sm-3 row-in-br">
+                            <div >
+                                <div class=" text-muted m-t-20">累计效益</div>
+                                <h2 ><span class="counter">144,096</span></h2>元
+                            </div>
+                        </div>
+                        <div class="col-lg-3 col-md-3 col-sm-3 row-in-br">
+                            <div >
+                                <div class=" text-muted m-t-20">节约标准煤</div>
+                                <h2 ><span class="counter">288.17</span></h2>吨
+                            </div>
+                        </div>
+                    </div>
+                    <div class="white-box">
+                        <h2>发电功率详情</h2>
+                        <ul class="country-state  p-t-0">
+                            <li>
+                                <h2><span id="pv1">50</span>/100<small> kW</small> <div class="pull-right"><small id="pv1p">90%</small></div></h2>
+                                <div class="progress">
+                                    <div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100" style="width:90%;"> <span class="sr-only">90% Complete</span></div>
+                                </div>
+                            </li>
+                            <br>
+                            <li>
+                                <h2><span id="pv2">75</span>/100<small> kW</small> <div class="pull-right"><small id="pv2p">95%</small></div></h2>
+                                <div class="progress">
+                                    <div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100" style="width:95%;"> <span class="sr-only">95% Complete</span></div>
+                                </div>
+                            </li>
+                            <br>
+                            <li>
+                                <h2><span id="pv3">40</span>/100<small> kW</small> <div class="pull-right"><small id="pv3p">80%</small> </div></h2>
+                                <div class="progress">
+                                    <div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100" style="width:80%;"> <span class="sr-only">80% Complete</span></div>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+                </div>
+            <!-- End Month Generation -->
+            <!-- ============================================================== -->
+            <!-- Information table -->
+            <!-- ============================================================== -->
+            <div class="row">
+                <div class="col-md-12 col-lg-12">
+                    <div class="panel" style="margin-left:15px;">
+                        <div class="panel-heading">
+                            <h2>
+                                <button type="button" class="btn btn-info btn-outline btn-circle m-r-5"><i class="icon-info"></i></button>
+                                <b>设备状况</b>
+                            </h2>
+                        </div>
+                        <div class="table-responsive">
+                            <table class="table table-hover manage-u-table">
+                                <thead>
+                                <tr>
+                                    <th class="text-center" style="width: 70px">#</th>
+                                    <th>设备</th>
+                                    <th>编号</th>
+                                    <th>工作状态</th>
+                                    <th>生产商</th>
+
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr>
+                                    <td class="text-center">1</td>
+                                    <td><span class="font-medium">PCS1</span>
+                                        <br/><span class="text-muted"></span></td>
+                                    <td>SN27154
+                                        <br/><span class="text-muted"></span></td>
+                                    <td>正常
+                                        <br/><span class="text-muted"></span></td>
+                                    <td>
+                                        合肥阳光
+                                        <!--<br/><span class="text-muted"></span></td>-->
+                                    </td>
+
+                                </tr>
+                                <tr>
+                                    <td class="text-center">2</td>
+                                    <td><span class="font-medium">PCS2</span>
+                                        <br/><span class="text-muted"></span></td>
+                                    <td>SN27155
+                                        <br/><span class="text-muted"></span></td>
+                                    <td>正常
+                                        <br/><span class="text-muted"></span></td>
+                                    <td>
+                                        合肥阳光
+                                        <!--<br/><span class="text-muted"></span></td>-->
+                                    </td>
+
+                                </tr>
+                                <tr>
+                                    <td class="text-center">3</td>
+                                    <td><span class="font-medium">PCS3</span>
+                                        <br/><span class="text-muted"></span></td>
+                                    <td>SN27155
+                                        <br/><span class="text-muted"></span></td>
+                                    <td>正常
+                                        <br/><span class="text-muted"></span></td>
+                                    <td>
+                                        合肥阳光
+                                        <!--<br/><span class="text-muted"></span></td>-->
+                                    </td>
+
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-12 col-lg-12">
+                    <div class="panel" style="margin-left:15px;">
+                        <div class="panel-heading">
+                            <h2 style="color: #cb2027">
+                                <button type="button" class="btn btn-info btn-outline btn-circle m-r-5"><i class="ti-alert"></i></button>
+                                <b>告警信息</b>
+                            </h2>
+                        </div>
+                        <div class="table-responsive">
+                            <table class="table table-hover manage-u-table">
+                                <thead>
+                                <tr>
+                                    <th class="text-center" style="width: 70px">#</th>
+                                    <th>设备</th>
+                                    <th>编号</th>
+                                    <th>故障内容</th>
+                                    <th>进入时间</th>
+                                    <th>离开时间</th>
+                                    <th>建议操作</th>
+                                    <th style="width: 100px">确认</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr>
+                                    <td class="text-center">1</td>
+                                    <td><span class="font-medium">PCS1</span>
+                                    </td>
+                                    <td>
+                                        SN27154
+                                    </td>
+                                    <td>
+                                        过压保护停机
+                                    </td>
+                                    <td>2017-11-03
+                                        <br/><span class="text-muted">10: 55 AM</span></td>
+                                    <td>2017-11-03
+                                        <br/><span class="text-muted">12: 51 AM</span></td>
+                                    <td>
+                                        重启
+                                    </td>
+                                    <td>
+                                        <button type="button" class="btn btn-info btn-outline btn-circle m-r-5"><i class="ti-check-box"></i></button>
+                                    </td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ============================================================== -->
+            <!-- End Right sidebar -->
+            <!-- ============================================================== -->
+        </div>
+        <!-- /.container-fluid -->
+        <footer class="footer text-center"> 2017 &copy; makers-vc.com </footer>
+    </div>
+    <!-- /#page-wrapper -->
+</div>
+<!-- /#wrapper -->
+<!-- jQuery -->
+<script src="http://cdn.bootcss.com/jquery/2.1.4/jquery.min.js"></script>
+<!-- Bootstrap Core JavaScript -->
+<script src="http://cdn.bootcss.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
+
+<script src="https://cdn.bootcss.com/waypoints/3.1.1/jquery.waypoints.min.js"></script>
+<script src="plugins/bower_components/counterup/jquery.counterup.min.js"></script>
+<!--slimscroll JavaScript -->
+<script src="js/jquery.slimscroll.js"></script>
+
+<!-- Custom Theme JavaScript -->
+<script src="js/custom.min.js"></script>
+<script src="js/pv.js"></script>
+<script src="js/time.js"></script>
+    <script src="js/mock-pv.js"></script>
+
+<script src="https://cdn.bootcss.com/echarts/3.7.2/echarts.min.js"></script>
+
+</body>
+
+</html>
